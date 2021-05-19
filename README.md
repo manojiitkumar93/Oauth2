@@ -16,7 +16,7 @@ Technically, when the client redirects the user to the authorization server, the
 
 After successful authentication, the authorization server calls back the client on the redirect URI and provides a code and the state value. The client checks that the state value is the same as the one it sent in the request to confirm that it was not someone else attempting to call the redirect URI.
 
-**----------------------------------------------------->   Step 1    <-----------------------------------------------------------**
+**----------------------------------------------------->   Step 2    <-----------------------------------------------------------**
 
 The resulting code is the client’s proof that the user authenticated. Now the client calls the authorization server with the
 code to get the token. *So why didn’t the authorization server directly return the second token (access
@@ -31,4 +31,12 @@ In this step 2, technically, the client now makes a request to the authorization
 **client_id and client_secret :** the client’s credentials.
 **redirect_uri :** which is the same one used in step 1 for validation.
 **grant_type :** with the value authorization_code , which identifies the kind of flow used. A server might support multiple flows, so it’s essential always to specify which is the current executed authentication flow.
+
+As a response, the server sends back an **access_token** . This token is a value that the client can use to call resources exposed by the resource server.
+
+**----------------------------------------------------->   Step 3    <-----------------------------------------------------------**
+
+After successfully obtaining the access token from the authorization server, the client can now call for the protected resource. The client uses an access token in the authorization request header when calling an endpoint of the resource server.
+
+
 
